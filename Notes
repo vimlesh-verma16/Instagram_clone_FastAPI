@@ -1,0 +1,7 @@
+
+create main.py 
+create venv name(env)
+pip install -r requirement.txt
+
+
+
