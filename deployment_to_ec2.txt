@@ -1,0 +1,1114 @@
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\WINDOWS\system32> Move-Item -Path "C:\Users\YourName\Downloads\fastapi_key.pem" -Destination "C:\Users\YourName\.ssh\"
+>>
+Move-Item : Cannot find path 'C:\Users\YourName\Downloads\fastapi_key.pem' because it does not exist.
+At line:1 char:1
++ Move-Item -Path "C:\Users\YourName\Downloads\fastapi_key.pem" -Destin ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\YourNa...fastapi_key.pem:String) [Move-Item], ItemNotFoundExce
+   ption
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.MoveItemCommand
+                        Move-Item -Path "C:\Users\Vimlesh\Downloads\fastapi_key.pem" -Destination "C:\Users\Vimlesh\.ssh\"
+>> C:\WINDOWS\system32>
+PS C:\WINDOWS\system32> icacls C:\Users\Vimlesh\.ssh\fastapi_key.pem /inheritance:r
+processed file: C:\Users\Vimlesh\.ssh\fastapi_key.pem
+Successfully processed 1 files; Failed processing 0 files
+PS C:\WINDOWS\system32> icacls C:\Users\YourName\.ssh\fastapi_key.pem /grant:r "%username%:R"
+%username%: No mapping between account names and security IDs was done.
+Successfully processed 0 files; Failed processing 1 files
+PS C:\WINDOWS\system32> $env:UserName
+Vimlesh
+PS C:\WINDOWS\system32> icacls C:\Users\YourName\.ssh\fastapi_key.pem /grant:r "%Vimlesh%:R"
+%Vimlesh%: No mapping between account names and security IDs was done.
+Successfully processed 0 files; Failed processing 1 files
+PS C:\WINDOWS\system32> icacls C:\Users\YourName\.ssh\fastapi_key.pem /grant:r "Vimlesh:R"
+C:\Users\YourName\.ssh\fastapi_key.pem: The system cannot find the path specified.
+Successfully processed 0 files; Failed processing 1 files
+PS C:\WINDOWS\system32> icacls C:\Users\vimlesh\.ssh\fastapi_key.pem /grant:r "%username%:R"
+%username%: No mapping between account names and security IDs was done.
+Successfully processed 0 files; Failed processing 1 files
+PS C:\WINDOWS\system32> icacls C:\Users\Vimlesh\.ssh\fastapi_key.pem /grant:r "%username%:R"
+%username%: No mapping between account names and security IDs was done.
+Successfully processed 0 files; Failed processing 1 files
+PS C:\WINDOWS\system32> icacls C:\Users\Vimlesh\.ssh\fastapi_key.pem /grant:r "Vimlesh:R"
+processed file: C:\Users\Vimlesh\.ssh\fastapi_key.pem
+Successfully processed 1 files; Failed processing 0 files
+PS C:\WINDOWS\system32> ssh -i "fastapi_key.pem" ubuntu@ec2-52-90-78-51.compute-1.amazonaws.com
+Warning: Identity file fastapi_key.pem not accessible: No such file or directory.
+The authenticity of host 'ec2-52-90-78-51.compute-1.amazonaws.com (52.90.78.51)' can't be established.
+ED25519 key fingerprint is SHA256:ExayWB8l0M4uvL9CRdwGbGJZK3K7dErwu7HCAbIgj/U.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-52-90-78-51.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+ubuntu@ec2-52-90-78-51.compute-1.amazonaws.com: Permission denied (publickey).
+PS C:\WINDOWS\system32> ssh -i C:\Users\YourName\.ssh\fastapi_key.pem ubuntu@ec2-52-90-78-51.compute-1.amazonaws.com
+>>
+Warning: Identity file C:\Users\YourName\.ssh\fastapi_key.pem not accessible: No such file or directory.
+ubuntu@ec2-52-90-78-51.compute-1.amazonaws.com: Permission denied (publickey).
+PS C:\WINDOWS\system32> ssh -i C:\Users\Vimlesh\.ssh\fastapi_key.pem ubuntu@ec2-52-90-78-51.compute-1.amazonaws.com
+>>
+Welcome to Ubuntu 24.04.1 LTS (GNU/Linux 6.8.0-1021-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sat Mar  1 13:24:44 UTC 2025
+
+  System load:  0.0               Processes:             103
+  Usage of /:   24.9% of 6.71GB   Users logged in:       0
+  Memory usage: 20%               IPv4 address for enX0: 172.31.90.199
+  Swap usage:   0%
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-172-31-90-199:~$ sudo apt-get update
+Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble InRelease
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:4 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:5 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 Packages [15.0 MB]
+Get:6 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [641 kB]
+Get:7 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe Translation-en [5982 kB]
+Get:8 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 Components [3871 kB]
+Get:9 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 c-n-f Metadata [301 kB]
+Get:10 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [269 kB]
+Get:11 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse Translation-en [118 kB]
+Get:12 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 Components [35.0 kB]
+Get:13 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 c-n-f Metadata [8328 B]
+Get:14 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [890 kB]
+Get:15 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [201 kB]
+Get:16 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [151 kB]
+Get:17 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1029 kB]
+Get:18 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [257 kB]
+Get:19 http://security.ubuntu.com/ubuntu noble-security/main Translation-en [122 kB]
+Get:20 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [364 kB]
+Get:21 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [19.9 kB]
+Get:22 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [695 kB]
+Get:23 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [138 kB]
+Get:24 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+Get:25 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [23.4 kB]
+Get:26 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [5308 B]
+Get:27 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:28 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 c-n-f Metadata [552 B]
+Get:29 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [208 B]
+Get:30 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/main amd64 c-n-f Metadata [112 B]
+Get:31 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [14.2 kB]
+Get:32 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [12.1 kB]
+Get:33 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [20.0 kB]
+Get:34 http://security.ubuntu.com/ubuntu noble-security/main amd64 Components [8980 B]
+Get:35 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 c-n-f Metadata [1104 B]
+Get:36 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+Get:37 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [815 kB]
+Get:38 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:39 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+Get:40 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 c-n-f Metadata [116 B]
+Get:41 http://security.ubuntu.com/ubuntu noble-security/universe Translation-en [174 kB]
+Get:42 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Components [51.9 kB]
+Get:43 http://security.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [13.5 kB]
+Get:44 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [667 kB]
+Get:45 http://security.ubuntu.com/ubuntu noble-security/restricted Translation-en [131 kB]
+Get:46 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Components [208 B]
+Get:47 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [19.4 kB]
+Get:48 http://security.ubuntu.com/ubuntu noble-security/multiverse Translation-en [4308 B]
+Get:49 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [208 B]
+Get:50 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 c-n-f Metadata [356 B]
+Fetched 32.5 MB in 6s (5577 kB/s)
+Reading package lists... Done
+ubuntu@ip-172-31-90-199:~$ sudo install -y python3 nginx
+install: invalid option -- 'y'
+Try 'install --help' for more information.
+ubuntu@ip-172-31-90-199:~$ sudo apt install -y python3 nginx
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+python3 is already the newest version (3.12.3-0ubuntu2).
+python3 set to manually installed.
+Suggested packages:
+  fcgiwrap nginx-doc ssl-cert
+The following NEW packages will be installed:
+  nginx nginx-common
+0 upgraded, 2 newly installed, 0 to remove and 134 not upgraded.
+Need to get 552 kB of archives.
+After this operation, 1596 kB of additional disk space will be used.
+Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 nginx-common all 1.24.0-2ubuntu7.1 [31.2 kB]
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 nginx amd64 1.24.0-2ubuntu7.1 [521 kB]
+Fetched 552 kB in 0s (20.5 MB/s)
+Preconfiguring packages ...
+Selecting previously unselected package nginx-common.
+(Reading database ... 70610 files and directories currently installed.)
+Preparing to unpack .../nginx-common_1.24.0-2ubuntu7.1_all.deb ...
+Unpacking nginx-common (1.24.0-2ubuntu7.1) ...
+Selecting previously unselected package nginx.
+Preparing to unpack .../nginx_1.24.0-2ubuntu7.1_amd64.deb ...
+Unpacking nginx (1.24.0-2ubuntu7.1) ...
+Setting up nginx (1.24.0-2ubuntu7.1) ...
+Setting up nginx-common (1.24.0-2ubuntu7.1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /usr/lib/systemd/system/nginx.service.
+Processing triggers for ufw (0.36.2-6) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@ip-172-31-90-199:~$ sudo vim /etc/nginx/sites-enabled/fastapi_nginx
+ubuntu@ip-172-31-90-199:~$ ubuntu@ip-172-31-90-199:~$
+ubuntu@ip-172-31-90-199:~$ sudo service nginx restart
+Job for nginx.service failed because the control process exited with error code.
+See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details.
+ubuntu@ip-172-31-90-199:~$ sudo nginx -t
+2025/03/01 14:08:34 [emerg] 1927#1927: unexpected end of file, expecting ";" or "}" in /etc/nginx/sites-enabled/fastapi_nginx:11
+nginx: configuration file /etc/nginx/nginx.conf test failed
+ubuntu@ip-172-31-90-199:~$ sudo nano /etc/nginx/sites-enabled/fastapi_nginx
+ubuntu@ip-172-31-90-199:~$ sudo service nginx restart
+ubuntu@ip-172-31-90-199:~$ git clone https://github.com/vimlesh-verma16/Instagram_clone_FastAPI.git
+Cloning into 'Instagram_clone_FastAPI'...
+remote: Enumerating objects: 17, done.
+remote: Counting objects: 100% (17/17), done.
+remote: Compressing objects: 100% (9/9), done.
+remote: Total 17 (delta 3), reused 17 (delta 3), pack-reused 0 (from 0)
+Receiving objects: 100% (17/17), done.
+Resolving deltas: 100% (3/3), done.
+ubuntu@ip-172-31-90-199:~$ ls
+Instagram_clone_FastAPI
+ubuntu@ip-172-31-90-199:~$ cd Instagram_clone_FastAPI
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ ls
+Notes  README.md  __pycache__  db  main.py  requirement.txt
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ pip3 install -r requirement.txt
+Command 'pip3' not found, but can be installed with:
+sudo apt install python3-pip
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ python3 install -r requirement.txt
+python3: can't open file '/home/ubuntu/Instagram_clone_FastAPI/install': [Errno 2] No such file or directory
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ sudo apt install python3-pip -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  binutils binutils-common binutils-x86-64-linux-gnu build-essential bzip2 cpp cpp-13 cpp-13-x86-64-linux-gnu cpp-x86-64-linux-gnu dpkg-dev fakeroot fontconfig-config fonts-dejavu-core
+  fonts-dejavu-mono g++ g++-13 g++-13-x86-64-linux-gnu g++-x86-64-linux-gnu gcc gcc-13 gcc-13-base gcc-13-x86-64-linux-gnu gcc-x86-64-linux-gnu javascript-common libalgorithm-diff-perl
+  libalgorithm-diff-xs-perl libalgorithm-merge-perl libaom3 libasan8 libatomic1 libbinutils libc-bin libc-dev-bin libc-devtools libc6 libc6-dev libcc1-0 libcrypt-dev libctf-nobfd0 libctf0
+  libde265-0 libdeflate0 libdpkg-perl libexpat1-dev libfakeroot libfile-fcntllock-perl libfontconfig1 libgcc-13-dev libgd3 libgomp1 libgprofng0 libheif-plugin-aomdec libheif-plugin-aomenc
+  libheif-plugin-libde265 libheif1 libhwasan0 libisl23 libitm1 libjbig0 libjpeg-turbo8 libjpeg8 libjs-jquery libjs-sphinxdoc libjs-underscore liblerc4 liblsan0 libmpc3 libpython3-dev
+  libpython3.12-dev libpython3.12-minimal libpython3.12-stdlib libpython3.12t64 libquadmath0 libsframe1 libsharpyuv0 libstdc++-13-dev libtiff6 libtsan2 libubsan1 libwebp7 libxpm4
+  linux-libc-dev linux-tools-common locales lto-disabled-list make manpages-dev python3-dev python3-wheel python3.12 python3.12-dev python3.12-minimal rpcsvc-proto zlib1g-dev
+Suggested packages:
+  binutils-doc gprofng-gui bzip2-doc cpp-doc gcc-13-locales cpp-13-doc debian-keyring g++-multilib g++-13-multilib gcc-13-doc gcc-multilib autoconf automake libtool flex bison gdb gcc-doc
+  gcc-13-multilib gdb-x86-64-linux-gnu glibc-doc libnss-nis libnss-nisplus bzr libgd-tools libheif-plugin-x265 libheif-plugin-ffmpegdec libheif-plugin-jpegdec libheif-plugin-jpegenc
+  libheif-plugin-j2kdec libheif-plugin-j2kenc libheif-plugin-rav1e libheif-plugin-svtenc libstdc++-13-doc make-doc python3.12-venv python3.12-doc binfmt-support
+The following NEW packages will be installed:
+  binutils binutils-common binutils-x86-64-linux-gnu build-essential bzip2 cpp cpp-13 cpp-13-x86-64-linux-gnu cpp-x86-64-linux-gnu dpkg-dev fakeroot fontconfig-config fonts-dejavu-core
+  fonts-dejavu-mono g++ g++-13 g++-13-x86-64-linux-gnu g++-x86-64-linux-gnu gcc gcc-13 gcc-13-base gcc-13-x86-64-linux-gnu gcc-x86-64-linux-gnu javascript-common libalgorithm-diff-perl
+  libalgorithm-diff-xs-perl libalgorithm-merge-perl libaom3 libasan8 libatomic1 libbinutils libc-dev-bin libc-devtools libc6-dev libcc1-0 libcrypt-dev libctf-nobfd0 libctf0 libde265-0
+  libdeflate0 libdpkg-perl libexpat1-dev libfakeroot libfile-fcntllock-perl libfontconfig1 libgcc-13-dev libgd3 libgomp1 libgprofng0 libheif-plugin-aomdec libheif-plugin-aomenc
+  libheif-plugin-libde265 libheif1 libhwasan0 libisl23 libitm1 libjbig0 libjpeg-turbo8 libjpeg8 libjs-jquery libjs-sphinxdoc libjs-underscore liblerc4 liblsan0 libmpc3 libpython3-dev
+  libpython3.12-dev libquadmath0 libsframe1 libsharpyuv0 libstdc++-13-dev libtiff6 libtsan2 libubsan1 libwebp7 libxpm4 linux-libc-dev lto-disabled-list make manpages-dev python3-dev
+  python3-pip python3-wheel python3.12-dev rpcsvc-proto zlib1g-dev
+The following packages will be upgraded:
+  libc-bin libc6 libpython3.12-minimal libpython3.12-stdlib libpython3.12t64 linux-tools-common locales python3.12 python3.12-minimal
+9 upgraded, 86 newly installed, 0 to remove and 125 not upgraded.
+Need to get 105 MB of archives.
+After this operation, 312 MB of additional disk space will be used.
+Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libc6 amd64 2.39-0ubuntu8.4 [3264 kB]
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libc-bin amd64 2.39-0ubuntu8.4 [682 kB]
+Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12t64 amd64 3.12.3-1ubuntu0.5 [2339 kB]
+Get:4 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3.12 amd64 3.12.3-1ubuntu0.5 [651 kB]
+Get:5 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-stdlib amd64 3.12.3-1ubuntu0.5 [2069 kB]
+Get:6 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3.12-minimal amd64 3.12.3-1ubuntu0.5 [2342 kB]
+Get:7 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-minimal amd64 3.12.3-1ubuntu0.5 [835 kB]
+Get:8 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 locales all 2.39-0ubuntu8.4 [4229 kB]
+Get:9 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils-common amd64 2.42-4ubuntu2.4 [240 kB]
+Get:10 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libsframe1 amd64 2.42-4ubuntu2.4 [15.1 kB]
+Get:11 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libbinutils amd64 2.42-4ubuntu2.4 [576 kB]
+Get:12 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libctf-nobfd0 amd64 2.42-4ubuntu2.4 [97.3 kB]
+Get:13 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libctf0 amd64 2.42-4ubuntu2.4 [94.5 kB]
+Get:14 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgprofng0 amd64 2.42-4ubuntu2.4 [849 kB]
+Get:15 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils-x86-64-linux-gnu amd64 2.42-4ubuntu2.4 [2464 kB]
+Get:16 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils amd64 2.42-4ubuntu2.4 [18.1 kB]
+Get:17 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libc-dev-bin amd64 2.39-0ubuntu8.4 [20.4 kB]
+Get:18 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-libc-dev amd64 6.8.0-54.56 [1795 kB]
+Get:19 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libcrypt-dev amd64 1:4.4.36-4build1 [112 kB]
+Get:20 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 rpcsvc-proto amd64 1.4.2-0ubuntu7 [67.4 kB]
+Get:21 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libc6-dev amd64 2.39-0ubuntu8.4 [2124 kB]
+Get:22 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-base amd64 13.3.0-6ubuntu2~24.04 [51.5 kB]
+Get:23 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libisl23 amd64 0.26-3build1.1 [680 kB]
+Get:24 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpc3 amd64 1.3.1-1build1.1 [54.6 kB]
+Get:25 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 cpp-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04 [10.7 MB]
+Get:26 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 cpp-13 amd64 13.3.0-6ubuntu2~24.04 [1038 B]
+Get:27 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 cpp-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [5326 B]
+Get:28 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 cpp amd64 4:13.2.0-7ubuntu1 [22.4 kB]
+Get:29 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libcc1-0 amd64 14.2.0-4ubuntu2~24.04 [48.0 kB]
+Get:30 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgomp1 amd64 14.2.0-4ubuntu2~24.04 [148 kB]
+Get:31 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libitm1 amd64 14.2.0-4ubuntu2~24.04 [29.7 kB]
+Get:32 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libatomic1 amd64 14.2.0-4ubuntu2~24.04 [10.5 kB]
+Get:33 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libasan8 amd64 14.2.0-4ubuntu2~24.04 [3031 kB]
+Get:34 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 liblsan0 amd64 14.2.0-4ubuntu2~24.04 [1322 kB]
+Get:35 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libtsan2 amd64 14.2.0-4ubuntu2~24.04 [2772 kB]
+Get:36 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libubsan1 amd64 14.2.0-4ubuntu2~24.04 [1184 kB]
+Get:37 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libhwasan0 amd64 14.2.0-4ubuntu2~24.04 [1641 kB]
+Get:38 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libquadmath0 amd64 14.2.0-4ubuntu2~24.04 [153 kB]
+Get:39 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-13-dev amd64 13.3.0-6ubuntu2~24.04 [2681 kB]
+Get:40 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04 [21.1 MB]
+Get:41 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13 amd64 13.3.0-6ubuntu2~24.04 [494 kB]
+Get:42 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 gcc-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [1212 B]
+Get:43 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 gcc amd64 4:13.2.0-7ubuntu1 [5018 B]
+Get:44 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libstdc++-13-dev amd64 13.3.0-6ubuntu2~24.04 [2420 kB]
+Get:45 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 g++-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04 [12.2 MB]
+Get:46 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 g++-13 amd64 13.3.0-6ubuntu2~24.04 [16.1 kB]
+Get:47 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 g++-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [964 B]
+Get:48 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 g++ amd64 4:13.2.0-7ubuntu1 [1100 B]
+Get:49 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 make amd64 4.3-4.1build2 [180 kB]
+Get:50 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libdpkg-perl all 1.22.6ubuntu6.1 [269 kB]
+Get:51 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 bzip2 amd64 1.0.8-5.1build0.1 [34.5 kB]
+Get:52 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 lto-disabled-list all 47 [12.4 kB]
+Get:53 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 dpkg-dev all 1.22.6ubuntu6.1 [1074 kB]
+Get:54 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 build-essential amd64 12.10ubuntu1 [4928 B]
+Get:55 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libfakeroot amd64 1.33-1 [32.4 kB]
+Get:56 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 fakeroot amd64 1.33-1 [67.2 kB]
+Get:57 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 fonts-dejavu-mono all 2.37-8 [502 kB]
+Get:58 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 fonts-dejavu-core all 2.37-8 [835 kB]
+Get:59 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 fontconfig-config amd64 2.15.0-1.1ubuntu2 [37.3 kB]
+Get:60 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 javascript-common all 11+nmu1 [5936 B]
+Get:61 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libalgorithm-diff-perl all 1.201-1 [41.8 kB]
+Get:62 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libalgorithm-diff-xs-perl amd64 0.04-8build3 [11.2 kB]
+Get:63 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libalgorithm-merge-perl all 0.08-5 [11.4 kB]
+Get:64 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libaom3 amd64 3.8.2-2ubuntu0.1 [1941 kB]
+Get:65 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libfontconfig1 amd64 2.15.0-1.1ubuntu2 [139 kB]
+Get:66 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv0 amd64 1.3.2-0.4build3 [15.8 kB]
+Get:67 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomdec amd64 1.17.6-1ubuntu4.1 [10.4 kB]
+Get:68 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libde265-0 amd64 1.0.15-1build3 [166 kB]
+Get:69 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-libde265 amd64 1.17.6-1ubuntu4.1 [8176 B]
+Get:70 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif1 amd64 1.17.6-1ubuntu4.1 [275 kB]
+Get:71 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]
+Get:72 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8 amd64 8c-2ubuntu11 [2148 B]
+Get:73 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libdeflate0 amd64 1.19-1build1.1 [43.9 kB]
+Get:74 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libjbig0 amd64 2.1-6.1ubuntu2 [29.7 kB]
+Get:75 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 liblerc4 amd64 4.0.0+ds-4ubuntu2 [179 kB]
+Get:76 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libwebp7 amd64 1.3.2-0.4build3 [230 kB]
+Get:77 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libtiff6 amd64 4.5.1+git230720-4ubuntu2.2 [199 kB]
+Get:78 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libxpm4 amd64 1:3.5.17-1build2 [36.5 kB]
+Get:79 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libgd3 amd64 2.3.3-9ubuntu5 [128 kB]
+Get:80 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libc-devtools amd64 2.39-0ubuntu8.4 [29.3 kB]
+Get:81 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libexpat1-dev amd64 2.6.1-2ubuntu0.2 [998 kB]
+Get:82 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libfile-fcntllock-perl amd64 0.22-4ubuntu5 [30.7 kB]
+Get:83 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomenc amd64 1.17.6-1ubuntu4.1 [14.7 kB]
+Get:84 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libjs-jquery all 3.6.1+dfsg+~3.5.14-1 [328 kB]
+Get:85 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libjs-underscore all 1.13.4~dfsg+~1.11.4-3 [118 kB]
+Get:86 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libjs-sphinxdoc all 7.2.6-6 [149 kB]
+Get:87 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 zlib1g-dev amd64 1:1.3.dfsg-3.1ubuntu2.1 [894 kB]
+Get:88 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-dev amd64 3.12.3-1ubuntu0.5 [5675 kB]
+Get:89 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3-dev amd64 3.12.3-0ubuntu2 [10.3 kB]
+Get:90 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-tools-common all 6.8.0-54.56 [636 kB]
+Get:91 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 manpages-dev all 6.7-2 [2013 kB]
+Get:92 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3.12-dev amd64 3.12.3-1ubuntu0.5 [498 kB]
+Get:93 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-dev amd64 3.12.3-0ubuntu2 [26.7 kB]
+Get:94 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 python3-wheel all 0.42.0-2 [53.1 kB]
+Get:95 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 python3-pip all 24.0+dfsg-1ubuntu1.1 [1317 kB]
+Fetched 105 MB in 1s (71.6 MB/s)
+Extracting templates from packages: 100%
+Preconfiguring packages ...
+(Reading database ... 70658 files and directories currently installed.)
+Preparing to unpack .../libc6_2.39-0ubuntu8.4_amd64.deb ...
+Unpacking libc6:amd64 (2.39-0ubuntu8.4) over (2.39-0ubuntu8.3) ...
+Setting up libc6:amd64 (2.39-0ubuntu8.4) ...
+(Reading database ... 70657 files and directories currently installed.)
+Preparing to unpack .../libc-bin_2.39-0ubuntu8.4_amd64.deb ...
+Unpacking libc-bin (2.39-0ubuntu8.4) over (2.39-0ubuntu8.3) ...
+Setting up libc-bin (2.39-0ubuntu8.4) ...
+(Reading database ... 70656 files and directories currently installed.)
+Preparing to unpack .../00-libpython3.12t64_3.12.3-1ubuntu0.5_amd64.deb ...
+Unpacking libpython3.12t64:amd64 (3.12.3-1ubuntu0.5) over (3.12.3-1ubuntu0.3) ...
+Preparing to unpack .../01-python3.12_3.12.3-1ubuntu0.5_amd64.deb ...
+Unpacking python3.12 (3.12.3-1ubuntu0.5) over (3.12.3-1ubuntu0.3) ...
+Preparing to unpack .../02-libpython3.12-stdlib_3.12.3-1ubuntu0.5_amd64.deb ...
+Unpacking libpython3.12-stdlib:amd64 (3.12.3-1ubuntu0.5) over (3.12.3-1ubuntu0.3) ...
+Preparing to unpack .../03-python3.12-minimal_3.12.3-1ubuntu0.5_amd64.deb ...
+Unpacking python3.12-minimal (3.12.3-1ubuntu0.5) over (3.12.3-1ubuntu0.3) ...
+Preparing to unpack .../04-libpython3.12-minimal_3.12.3-1ubuntu0.5_amd64.deb ...
+Unpacking libpython3.12-minimal:amd64 (3.12.3-1ubuntu0.5) over (3.12.3-1ubuntu0.3) ...
+Preparing to unpack .../05-locales_2.39-0ubuntu8.4_all.deb ...
+Unpacking locales (2.39-0ubuntu8.4) over (2.39-0ubuntu8.3) ...
+Selecting previously unselected package binutils-common:amd64.
+Preparing to unpack .../06-binutils-common_2.42-4ubuntu2.4_amd64.deb ...
+Unpacking binutils-common:amd64 (2.42-4ubuntu2.4) ...
+Selecting previously unselected package libsframe1:amd64.
+Preparing to unpack .../07-libsframe1_2.42-4ubuntu2.4_amd64.deb ...
+Unpacking libsframe1:amd64 (2.42-4ubuntu2.4) ...
+Selecting previously unselected package libbinutils:amd64.
+Preparing to unpack .../08-libbinutils_2.42-4ubuntu2.4_amd64.deb ...
+Unpacking libbinutils:amd64 (2.42-4ubuntu2.4) ...
+Selecting previously unselected package libctf-nobfd0:amd64.
+Preparing to unpack .../09-libctf-nobfd0_2.42-4ubuntu2.4_amd64.deb ...
+Unpacking libctf-nobfd0:amd64 (2.42-4ubuntu2.4) ...
+Selecting previously unselected package libctf0:amd64.
+Preparing to unpack .../10-libctf0_2.42-4ubuntu2.4_amd64.deb ...
+Unpacking libctf0:amd64 (2.42-4ubuntu2.4) ...
+Selecting previously unselected package libgprofng0:amd64.
+Preparing to unpack .../11-libgprofng0_2.42-4ubuntu2.4_amd64.deb ...
+Unpacking libgprofng0:amd64 (2.42-4ubuntu2.4) ...
+Selecting previously unselected package binutils-x86-64-linux-gnu.
+Preparing to unpack .../12-binutils-x86-64-linux-gnu_2.42-4ubuntu2.4_amd64.deb ...
+Unpacking binutils-x86-64-linux-gnu (2.42-4ubuntu2.4) ...
+Selecting previously unselected package binutils.
+Preparing to unpack .../13-binutils_2.42-4ubuntu2.4_amd64.deb ...
+Unpacking binutils (2.42-4ubuntu2.4) ...
+Selecting previously unselected package libc-dev-bin.
+Preparing to unpack .../14-libc-dev-bin_2.39-0ubuntu8.4_amd64.deb ...
+Unpacking libc-dev-bin (2.39-0ubuntu8.4) ...
+Selecting previously unselected package linux-libc-dev:amd64.
+Preparing to unpack .../15-linux-libc-dev_6.8.0-54.56_amd64.deb ...
+Unpacking linux-libc-dev:amd64 (6.8.0-54.56) ...
+Selecting previously unselected package libcrypt-dev:amd64.
+Preparing to unpack .../16-libcrypt-dev_1%3a4.4.36-4build1_amd64.deb ...
+Unpacking libcrypt-dev:amd64 (1:4.4.36-4build1) ...
+Selecting previously unselected package rpcsvc-proto.
+Preparing to unpack .../17-rpcsvc-proto_1.4.2-0ubuntu7_amd64.deb ...
+Unpacking rpcsvc-proto (1.4.2-0ubuntu7) ...
+Selecting previously unselected package libc6-dev:amd64.
+Preparing to unpack .../18-libc6-dev_2.39-0ubuntu8.4_amd64.deb ...
+Unpacking libc6-dev:amd64 (2.39-0ubuntu8.4) ...
+Selecting previously unselected package gcc-13-base:amd64.
+Preparing to unpack .../19-gcc-13-base_13.3.0-6ubuntu2~24.04_amd64.deb ...
+Unpacking gcc-13-base:amd64 (13.3.0-6ubuntu2~24.04) ...
+Selecting previously unselected package libisl23:amd64.
+Preparing to unpack .../20-libisl23_0.26-3build1.1_amd64.deb ...
+Unpacking libisl23:amd64 (0.26-3build1.1) ...
+Selecting previously unselected package libmpc3:amd64.
+Preparing to unpack .../21-libmpc3_1.3.1-1build1.1_amd64.deb ...
+Unpacking libmpc3:amd64 (1.3.1-1build1.1) ...
+Selecting previously unselected package cpp-13-x86-64-linux-gnu.
+Preparing to unpack .../22-cpp-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04_amd64.deb ...
+Unpacking cpp-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04) ...
+Selecting previously unselected package cpp-13.
+Preparing to unpack .../23-cpp-13_13.3.0-6ubuntu2~24.04_amd64.deb ...
+Unpacking cpp-13 (13.3.0-6ubuntu2~24.04) ...
+Selecting previously unselected package cpp-x86-64-linux-gnu.
+Preparing to unpack .../24-cpp-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...
+Unpacking cpp-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+Selecting previously unselected package cpp.
+Preparing to unpack .../25-cpp_4%3a13.2.0-7ubuntu1_amd64.deb ...
+Unpacking cpp (4:13.2.0-7ubuntu1) ...
+Selecting previously unselected package libcc1-0:amd64.
+Preparing to unpack .../26-libcc1-0_14.2.0-4ubuntu2~24.04_amd64.deb ...
+Unpacking libcc1-0:amd64 (14.2.0-4ubuntu2~24.04) ...
+Selecting previously unselected package libgomp1:amd64.
+Preparing to unpack .../27-libgomp1_14.2.0-4ubuntu2~24.04_amd64.deb ...
+Unpacking libgomp1:amd64 (14.2.0-4ubuntu2~24.04) ...
+Selecting previously unselected package libitm1:amd64.
+Preparing to unpack .../28-libitm1_14.2.0-4ubuntu2~24.04_amd64.deb ...
+Unpacking libitm1:amd64 (14.2.0-4ubuntu2~24.04) ...
+Selecting previously unselected package libatomic1:amd64.
+Preparing to unpack .../29-libatomic1_14.2.0-4ubuntu2~24.04_amd64.deb ...
+Unpacking libatomic1:amd64 (14.2.0-4ubuntu2~24.04) ...
+Selecting previously unselected package libasan8:amd64.
+Preparing to unpack .../30-libasan8_14.2.0-4ubuntu2~24.04_amd64.deb ...
+Unpacking libasan8:amd64 (14.2.0-4ubuntu2~24.04) ...
+Selecting previously unselected package liblsan0:amd64.
+Preparing to unpack .../31-liblsan0_14.2.0-4ubuntu2~24.04_amd64.deb ...
+Unpacking liblsan0:amd64 (14.2.0-4ubuntu2~24.04) ...
+Selecting previously unselected package libtsan2:amd64.
+Preparing to unpack .../32-libtsan2_14.2.0-4ubuntu2~24.04_amd64.deb ...
+Unpacking libtsan2:amd64 (14.2.0-4ubuntu2~24.04) ...
+Selecting previously unselected package libubsan1:amd64.
+Preparing to unpack .../33-libubsan1_14.2.0-4ubuntu2~24.04_amd64.deb ...
+Unpacking libubsan1:amd64 (14.2.0-4ubuntu2~24.04) ...
+Selecting previously unselected package libhwasan0:amd64.
+Preparing to unpack .../34-libhwasan0_14.2.0-4ubuntu2~24.04_amd64.deb ...
+Unpacking libhwasan0:amd64 (14.2.0-4ubuntu2~24.04) ...
+Selecting previously unselected package libquadmath0:amd64.
+Preparing to unpack .../35-libquadmath0_14.2.0-4ubuntu2~24.04_amd64.deb ...
+Unpacking libquadmath0:amd64 (14.2.0-4ubuntu2~24.04) ...
+Selecting previously unselected package libgcc-13-dev:amd64.
+Preparing to unpack .../36-libgcc-13-dev_13.3.0-6ubuntu2~24.04_amd64.deb ...
+Unpacking libgcc-13-dev:amd64 (13.3.0-6ubuntu2~24.04) ...
+Selecting previously unselected package gcc-13-x86-64-linux-gnu.
+Preparing to unpack .../37-gcc-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04_amd64.deb ...
+Unpacking gcc-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04) ...
+Selecting previously unselected package gcc-13.
+Preparing to unpack .../38-gcc-13_13.3.0-6ubuntu2~24.04_amd64.deb ...
+Unpacking gcc-13 (13.3.0-6ubuntu2~24.04) ...
+Selecting previously unselected package gcc-x86-64-linux-gnu.
+Preparing to unpack .../39-gcc-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...
+Unpacking gcc-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+Selecting previously unselected package gcc.
+Preparing to unpack .../40-gcc_4%3a13.2.0-7ubuntu1_amd64.deb ...
+Unpacking gcc (4:13.2.0-7ubuntu1) ...
+Selecting previously unselected package libstdc++-13-dev:amd64.
+Preparing to unpack .../41-libstdc++-13-dev_13.3.0-6ubuntu2~24.04_amd64.deb ...
+Unpacking libstdc++-13-dev:amd64 (13.3.0-6ubuntu2~24.04) ...
+Selecting previously unselected package g++-13-x86-64-linux-gnu.
+Preparing to unpack .../42-g++-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04_amd64.deb ...
+Unpacking g++-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04) ...
+Selecting previously unselected package g++-13.
+Preparing to unpack .../43-g++-13_13.3.0-6ubuntu2~24.04_amd64.deb ...
+Unpacking g++-13 (13.3.0-6ubuntu2~24.04) ...
+Selecting previously unselected package g++-x86-64-linux-gnu.
+Preparing to unpack .../44-g++-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...
+Unpacking g++-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+Selecting previously unselected package g++.
+Preparing to unpack .../45-g++_4%3a13.2.0-7ubuntu1_amd64.deb ...
+Unpacking g++ (4:13.2.0-7ubuntu1) ...
+Selecting previously unselected package make.
+Preparing to unpack .../46-make_4.3-4.1build2_amd64.deb ...
+Unpacking make (4.3-4.1build2) ...
+Selecting previously unselected package libdpkg-perl.
+Preparing to unpack .../47-libdpkg-perl_1.22.6ubuntu6.1_all.deb ...
+Unpacking libdpkg-perl (1.22.6ubuntu6.1) ...
+Selecting previously unselected package bzip2.
+Preparing to unpack .../48-bzip2_1.0.8-5.1build0.1_amd64.deb ...
+Unpacking bzip2 (1.0.8-5.1build0.1) ...
+Selecting previously unselected package lto-disabled-list.
+Preparing to unpack .../49-lto-disabled-list_47_all.deb ...
+Unpacking lto-disabled-list (47) ...
+Selecting previously unselected package dpkg-dev.
+Preparing to unpack .../50-dpkg-dev_1.22.6ubuntu6.1_all.deb ...
+Unpacking dpkg-dev (1.22.6ubuntu6.1) ...
+Selecting previously unselected package build-essential.
+Preparing to unpack .../51-build-essential_12.10ubuntu1_amd64.deb ...
+Unpacking build-essential (12.10ubuntu1) ...
+Selecting previously unselected package libfakeroot:amd64.
+Preparing to unpack .../52-libfakeroot_1.33-1_amd64.deb ...
+Unpacking libfakeroot:amd64 (1.33-1) ...
+Selecting previously unselected package fakeroot.
+Preparing to unpack .../53-fakeroot_1.33-1_amd64.deb ...
+Unpacking fakeroot (1.33-1) ...
+Selecting previously unselected package fonts-dejavu-mono.
+Preparing to unpack .../54-fonts-dejavu-mono_2.37-8_all.deb ...
+Unpacking fonts-dejavu-mono (2.37-8) ...
+Selecting previously unselected package fonts-dejavu-core.
+Preparing to unpack .../55-fonts-dejavu-core_2.37-8_all.deb ...
+Unpacking fonts-dejavu-core (2.37-8) ...
+Selecting previously unselected package fontconfig-config.
+Preparing to unpack .../56-fontconfig-config_2.15.0-1.1ubuntu2_amd64.deb ...
+Unpacking fontconfig-config (2.15.0-1.1ubuntu2) ...
+Selecting previously unselected package javascript-common.
+Preparing to unpack .../57-javascript-common_11+nmu1_all.deb ...
+Unpacking javascript-common (11+nmu1) ...
+Selecting previously unselected package libalgorithm-diff-perl.
+Preparing to unpack .../58-libalgorithm-diff-perl_1.201-1_all.deb ...
+Unpacking libalgorithm-diff-perl (1.201-1) ...
+Selecting previously unselected package libalgorithm-diff-xs-perl:amd64.
+Preparing to unpack .../59-libalgorithm-diff-xs-perl_0.04-8build3_amd64.deb ...
+Unpacking libalgorithm-diff-xs-perl:amd64 (0.04-8build3) ...
+Selecting previously unselected package libalgorithm-merge-perl.
+Preparing to unpack .../60-libalgorithm-merge-perl_0.08-5_all.deb ...
+Unpacking libalgorithm-merge-perl (0.08-5) ...
+Selecting previously unselected package libaom3:amd64.
+Preparing to unpack .../61-libaom3_3.8.2-2ubuntu0.1_amd64.deb ...
+Unpacking libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+Selecting previously unselected package libfontconfig1:amd64.
+Preparing to unpack .../62-libfontconfig1_2.15.0-1.1ubuntu2_amd64.deb ...
+Unpacking libfontconfig1:amd64 (2.15.0-1.1ubuntu2) ...
+Selecting previously unselected package libsharpyuv0:amd64.
+Preparing to unpack .../63-libsharpyuv0_1.3.2-0.4build3_amd64.deb ...
+Unpacking libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+Selecting previously unselected package libheif-plugin-aomdec:amd64.
+Preparing to unpack .../64-libheif-plugin-aomdec_1.17.6-1ubuntu4.1_amd64.deb ...
+Unpacking libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.1) ...
+Selecting previously unselected package libde265-0:amd64.
+Preparing to unpack .../65-libde265-0_1.0.15-1build3_amd64.deb ...
+Unpacking libde265-0:amd64 (1.0.15-1build3) ...
+Selecting previously unselected package libheif-plugin-libde265:amd64.
+Preparing to unpack .../66-libheif-plugin-libde265_1.17.6-1ubuntu4.1_amd64.deb ...
+Unpacking libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.1) ...
+Selecting previously unselected package libheif1:amd64.
+Preparing to unpack .../67-libheif1_1.17.6-1ubuntu4.1_amd64.deb ...
+Unpacking libheif1:amd64 (1.17.6-1ubuntu4.1) ...
+Selecting previously unselected package libjpeg-turbo8:amd64.
+Preparing to unpack .../68-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...
+Unpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+Selecting previously unselected package libjpeg8:amd64.
+Preparing to unpack .../69-libjpeg8_8c-2ubuntu11_amd64.deb ...
+Unpacking libjpeg8:amd64 (8c-2ubuntu11) ...
+Selecting previously unselected package libdeflate0:amd64.
+Preparing to unpack .../70-libdeflate0_1.19-1build1.1_amd64.deb ...
+Unpacking libdeflate0:amd64 (1.19-1build1.1) ...
+Selecting previously unselected package libjbig0:amd64.
+Preparing to unpack .../71-libjbig0_2.1-6.1ubuntu2_amd64.deb ...
+Unpacking libjbig0:amd64 (2.1-6.1ubuntu2) ...
+Selecting previously unselected package liblerc4:amd64.
+Preparing to unpack .../72-liblerc4_4.0.0+ds-4ubuntu2_amd64.deb ...
+Unpacking liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+Selecting previously unselected package libwebp7:amd64.
+Preparing to unpack .../73-libwebp7_1.3.2-0.4build3_amd64.deb ...
+Unpacking libwebp7:amd64 (1.3.2-0.4build3) ...
+Selecting previously unselected package libtiff6:amd64.
+Preparing to unpack .../74-libtiff6_4.5.1+git230720-4ubuntu2.2_amd64.deb ...
+Unpacking libtiff6:amd64 (4.5.1+git230720-4ubuntu2.2) ...
+Selecting previously unselected package libxpm4:amd64.
+Preparing to unpack .../75-libxpm4_1%3a3.5.17-1build2_amd64.deb ...
+Unpacking libxpm4:amd64 (1:3.5.17-1build2) ...
+Selecting previously unselected package libgd3:amd64.
+Preparing to unpack .../76-libgd3_2.3.3-9ubuntu5_amd64.deb ...
+Unpacking libgd3:amd64 (2.3.3-9ubuntu5) ...
+Selecting previously unselected package libc-devtools.
+Preparing to unpack .../77-libc-devtools_2.39-0ubuntu8.4_amd64.deb ...
+Unpacking libc-devtools (2.39-0ubuntu8.4) ...
+Selecting previously unselected package libexpat1-dev:amd64.
+Preparing to unpack .../78-libexpat1-dev_2.6.1-2ubuntu0.2_amd64.deb ...
+Unpacking libexpat1-dev:amd64 (2.6.1-2ubuntu0.2) ...
+Selecting previously unselected package libfile-fcntllock-perl.
+Preparing to unpack .../79-libfile-fcntllock-perl_0.22-4ubuntu5_amd64.deb ...
+Unpacking libfile-fcntllock-perl (0.22-4ubuntu5) ...
+Selecting previously unselected package libheif-plugin-aomenc:amd64.
+Preparing to unpack .../80-libheif-plugin-aomenc_1.17.6-1ubuntu4.1_amd64.deb ...
+Unpacking libheif-plugin-aomenc:amd64 (1.17.6-1ubuntu4.1) ...
+Selecting previously unselected package libjs-jquery.
+Preparing to unpack .../81-libjs-jquery_3.6.1+dfsg+~3.5.14-1_all.deb ...
+Unpacking libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
+Selecting previously unselected package libjs-underscore.
+Preparing to unpack .../82-libjs-underscore_1.13.4~dfsg+~1.11.4-3_all.deb ...
+Unpacking libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
+Selecting previously unselected package libjs-sphinxdoc.
+Preparing to unpack .../83-libjs-sphinxdoc_7.2.6-6_all.deb ...
+Unpacking libjs-sphinxdoc (7.2.6-6) ...
+Selecting previously unselected package zlib1g-dev:amd64.
+Preparing to unpack .../84-zlib1g-dev_1%3a1.3.dfsg-3.1ubuntu2.1_amd64.deb ...
+Unpacking zlib1g-dev:amd64 (1:1.3.dfsg-3.1ubuntu2.1) ...
+Selecting previously unselected package libpython3.12-dev:amd64.
+Preparing to unpack .../85-libpython3.12-dev_3.12.3-1ubuntu0.5_amd64.deb ...
+Unpacking libpython3.12-dev:amd64 (3.12.3-1ubuntu0.5) ...
+Selecting previously unselected package libpython3-dev:amd64.
+Preparing to unpack .../86-libpython3-dev_3.12.3-0ubuntu2_amd64.deb ...
+Unpacking libpython3-dev:amd64 (3.12.3-0ubuntu2) ...
+Preparing to unpack .../87-linux-tools-common_6.8.0-54.56_all.deb ...
+Unpacking linux-tools-common (6.8.0-54.56) over (6.8.0-51.52) ...
+Selecting previously unselected package manpages-dev.
+Preparing to unpack .../88-manpages-dev_6.7-2_all.deb ...
+Unpacking manpages-dev (6.7-2) ...
+Selecting previously unselected package python3.12-dev.
+Preparing to unpack .../89-python3.12-dev_3.12.3-1ubuntu0.5_amd64.deb ...
+Unpacking python3.12-dev (3.12.3-1ubuntu0.5) ...
+Selecting previously unselected package python3-dev.
+Preparing to unpack .../90-python3-dev_3.12.3-0ubuntu2_amd64.deb ...
+Unpacking python3-dev (3.12.3-0ubuntu2) ...
+Selecting previously unselected package python3-wheel.
+Preparing to unpack .../91-python3-wheel_0.42.0-2_all.deb ...
+Unpacking python3-wheel (0.42.0-2) ...
+Selecting previously unselected package python3-pip.
+Preparing to unpack .../92-python3-pip_24.0+dfsg-1ubuntu1.1_all.deb ...
+Unpacking python3-pip (24.0+dfsg-1ubuntu1.1) ...
+Setting up javascript-common (11+nmu1) ...
+Setting up libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+Setting up libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+Setting up manpages-dev (6.7-2) ...
+Setting up lto-disabled-list (47) ...
+Setting up liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+Setting up libxpm4:amd64 (1:3.5.17-1build2) ...
+Setting up libfile-fcntllock-perl (0.22-4ubuntu5) ...
+Setting up libalgorithm-diff-perl (1.201-1) ...
+Setting up libpython3.12-minimal:amd64 (3.12.3-1ubuntu0.5) ...
+Setting up binutils-common:amd64 (2.42-4ubuntu2.4) ...
+Setting up libdeflate0:amd64 (1.19-1build1.1) ...
+Setting up linux-libc-dev:amd64 (6.8.0-54.56) ...
+Setting up libctf-nobfd0:amd64 (2.42-4ubuntu2.4) ...
+Setting up libgomp1:amd64 (14.2.0-4ubuntu2~24.04) ...
+Setting up bzip2 (1.0.8-5.1build0.1) ...
+Setting up locales (2.39-0ubuntu8.4) ...
+Generating locales (this might take a while)...
+  en_US.UTF-8... done
+Generation complete.
+Setting up python3-wheel (0.42.0-2) ...
+Setting up libjbig0:amd64 (2.1-6.1ubuntu2) ...
+Setting up libsframe1:amd64 (2.42-4ubuntu2.4) ...
+Setting up libfakeroot:amd64 (1.33-1) ...
+Setting up fakeroot (1.33-1) ...
+update-alternatives: using /usr/bin/fakeroot-sysv to provide /usr/bin/fakeroot (fakeroot) in auto mode
+Setting up rpcsvc-proto (1.4.2-0ubuntu7) ...
+Setting up gcc-13-base:amd64 (13.3.0-6ubuntu2~24.04) ...
+Setting up make (4.3-4.1build2) ...
+Setting up libquadmath0:amd64 (14.2.0-4ubuntu2~24.04) ...
+Setting up fonts-dejavu-mono (2.37-8) ...
+Setting up libmpc3:amd64 (1.3.1-1build1.1) ...
+Setting up libatomic1:amd64 (14.2.0-4ubuntu2~24.04) ...
+Setting up fonts-dejavu-core (2.37-8) ...
+Setting up python3-pip (24.0+dfsg-1ubuntu1.1) ...
+Setting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+Setting up libdpkg-perl (1.22.6ubuntu6.1) ...
+Setting up libwebp7:amd64 (1.3.2-0.4build3) ...
+Setting up libubsan1:amd64 (14.2.0-4ubuntu2~24.04) ...
+Setting up libhwasan0:amd64 (14.2.0-4ubuntu2~24.04) ...
+Setting up libcrypt-dev:amd64 (1:4.4.36-4build1) ...
+Setting up libasan8:amd64 (14.2.0-4ubuntu2~24.04) ...
+Setting up libtsan2:amd64 (14.2.0-4ubuntu2~24.04) ...
+Setting up libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
+Setting up libbinutils:amd64 (2.42-4ubuntu2.4) ...
+Setting up libisl23:amd64 (0.26-3build1.1) ...
+Setting up libde265-0:amd64 (1.0.15-1build3) ...
+Setting up libc-dev-bin (2.39-0ubuntu8.4) ...
+Setting up linux-tools-common (6.8.0-54.56) ...
+Setting up libalgorithm-diff-xs-perl:amd64 (0.04-8build3) ...
+Setting up libcc1-0:amd64 (14.2.0-4ubuntu2~24.04) ...
+Setting up liblsan0:amd64 (14.2.0-4ubuntu2~24.04) ...
+Setting up libitm1:amd64 (14.2.0-4ubuntu2~24.04) ...
+Setting up libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
+Setting up libalgorithm-merge-perl (0.08-5) ...
+Setting up libctf0:amd64 (2.42-4ubuntu2.4) ...
+Setting up libjpeg8:amd64 (8c-2ubuntu11) ...
+Setting up python3.12-minimal (3.12.3-1ubuntu0.5) ...
+Setting up libpython3.12-stdlib:amd64 (3.12.3-1ubuntu0.5) ...
+Setting up cpp-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04) ...
+Setting up fontconfig-config (2.15.0-1.1ubuntu2) ...
+Setting up python3.12 (3.12.3-1ubuntu0.5) ...
+Setting up libpython3.12t64:amd64 (3.12.3-1ubuntu0.5) ...
+Setting up libgprofng0:amd64 (2.42-4ubuntu2.4) ...
+Setting up libjs-sphinxdoc (7.2.6-6) ...
+Setting up libgcc-13-dev:amd64 (13.3.0-6ubuntu2~24.04) ...
+Setting up libtiff6:amd64 (4.5.1+git230720-4ubuntu2.2) ...
+Setting up libc6-dev:amd64 (2.39-0ubuntu8.4) ...
+Setting up libstdc++-13-dev:amd64 (13.3.0-6ubuntu2~24.04) ...
+Setting up binutils-x86-64-linux-gnu (2.42-4ubuntu2.4) ...
+Setting up cpp-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+Setting up cpp-13 (13.3.0-6ubuntu2~24.04) ...
+Setting up gcc-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04) ...
+Setting up binutils (2.42-4ubuntu2.4) ...
+Setting up dpkg-dev (1.22.6ubuntu6.1) ...
+Setting up libexpat1-dev:amd64 (2.6.1-2ubuntu0.2) ...
+Setting up gcc-13 (13.3.0-6ubuntu2~24.04) ...
+Setting up zlib1g-dev:amd64 (1:1.3.dfsg-3.1ubuntu2.1) ...
+Setting up cpp (4:13.2.0-7ubuntu1) ...
+Setting up g++-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04) ...
+Setting up gcc-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+Setting up libpython3.12-dev:amd64 (3.12.3-1ubuntu0.5) ...
+Setting up gcc (4:13.2.0-7ubuntu1) ...
+Setting up python3.12-dev (3.12.3-1ubuntu0.5) ...
+Setting up g++-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+Setting up g++-13 (13.3.0-6ubuntu2~24.04) ...
+Setting up libpython3-dev:amd64 (3.12.3-0ubuntu2) ...
+Setting up python3-dev (3.12.3-0ubuntu2) ...
+Setting up g++ (4:13.2.0-7ubuntu1) ...
+update-alternatives: using /usr/bin/g++ to provide /usr/bin/c++ (c++) in auto mode
+Setting up build-essential (12.10ubuntu1) ...
+Setting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.1) ...
+Setting up libheif1:amd64 (1.17.6-1ubuntu4.1) ...
+Setting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.1) ...
+Setting up libheif-plugin-aomenc:amd64 (1.17.6-1ubuntu4.1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.4) ...
+Processing triggers for systemd (255.4-1ubuntu8.4) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for sgml-base (1.31) ...
+Setting up libfontconfig1:amd64 (2.15.0-1.1ubuntu2) ...
+Setting up libgd3:amd64 (2.3.3-9ubuntu5) ...
+Setting up libc-devtools (2.39-0ubuntu8.4) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.4) ...
+Scanning processes...
+Scanning candidates...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+ systemctl restart acpid.service chrony.service cron.service fwupd.service multipathd.service nginx.service polkit.service rsyslog.service ssh.service systemd-journald.service systemd-networkd.service systemd-resolved.service systemd-udevd.service udisks2.service
+
+Service restarts being deferred:
+ systemctl restart ModemManager.service
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart getty@tty1.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ ubuntu @ session #4: apt[2034], sshd[1093,1204]
+ ubuntu @ user manager service: systemd[1098]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ pip3 install -r requirements.txt
+error: externally-managed-environment
+
+× This environment is externally managed
+╰─> To install Python packages system-wide, try apt install
+    python3-xyz, where xyz is the package you are trying to
+    install.
+
+    If you wish to install a non-Debian-packaged Python package,
+    create a virtual environment using python3 -m venv path/to/venv.
+    Then use path/to/venv/bin/python and path/to/venv/bin/pip. Make
+    sure you have python3-full installed.
+
+    If you wish to install a non-Debian packaged Python application,
+    it may be easiest to use pipx install xyz, which will manage a
+    virtual environment for you. Make sure you have pipx installed.
+
+    See /usr/share/doc/python3.12/README.venv for more information.
+
+note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+hint: See PEP 668 for the detailed specification.
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ python3 -m venv env
+The virtual environment was not created successfully because ensurepip is not
+available.  On Debian/Ubuntu systems, you need to install the python3-venv
+package using the following command.
+
+    apt install python3.12-venv
+
+You may need to use sudo with that command.  After installing the python3-venv
+package, recreate your virtual environment.
+
+Failing command: /home/ubuntu/Instagram_clone_FastAPI/env/bin/python3
+
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ apt install python3.12-venv
+E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ sudo apt install python3.12-venv
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  python3-pip-whl python3-setuptools-whl
+The following NEW packages will be installed:
+  python3-pip-whl python3-setuptools-whl python3.12-venv
+0 upgraded, 3 newly installed, 0 to remove and 125 not upgraded.
+Need to get 2424 kB of archives.
+After this operation, 2771 kB of additional disk space will be used.
+Do you want to continue? [Y/n] client_loop: send disconnect: Connection reset
+PS C:\WINDOWS\system32>  ssh -i C:\Users\Vimlesh\.ssh\fastapi_key.pem ubuntu@ec2-52-90-78-51.compute-1.amazonaws.com
+Welcome to Ubuntu 24.04.1 LTS (GNU/Linux 6.8.0-1021-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sat Mar  1 14:35:18 UTC 2025
+
+  System load:  0.0               Processes:             112
+  Usage of /:   33.3% of 6.71GB   Users logged in:       1
+  Memory usage: 27%               IPv4 address for enX0: 172.31.90.199
+  Swap usage:   0%
+
+ * Ubuntu Pro delivers the most comprehensive open source security and
+   compliance features.
+
+   https://ubuntu.com/aws/pro
+
+Expanded Security Maintenance for Applications is not enabled.
+
+126 updates can be applied immediately.
+38 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+*** System restart required ***
+Last login: Sat Mar  1 13:24:46 2025 from 101.0.63.147
+ubuntu@ip-172-31-90-199:~$ ls
+Instagram_clone_FastAPI
+ubuntu@ip-172-31-90-199:~$ cd Instagram_clone_FastAPI
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ pip install -r requirement.txt
+error: externally-managed-environment
+
+× This environment is externally managed
+╰─> To install Python packages system-wide, try apt install
+    python3-xyz, where xyz is the package you are trying to
+    install.
+
+    If you wish to install a non-Debian-packaged Python package,
+    create a virtual environment using python3 -m venv path/to/venv.
+    Then use path/to/venv/bin/python and path/to/venv/bin/pip. Make
+    sure you have python3-full installed.
+
+    If you wish to install a non-Debian packaged Python application,
+    it may be easiest to use pipx install xyz, which will manage a
+    virtual environment for you. Make sure you have pipx installed.
+
+    See /usr/share/doc/python3.12/README.venv for more information.
+
+note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+hint: See PEP 668 for the detailed specification.
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ ls
+Notes  README.md  __pycache__  db  env  main.py  requirement.txt
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ env\scripts\activate
+envscriptsactivate: command not found
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ source env/bin/activate
+-bash: env/bin/activate: No such file or directory
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ cd env
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI/env$ ls
+bin  include  lib  lib64  pyvenv.cfg
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI/env$ cd bin
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI/env/bin$ ls
+python  python3  python3.12
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI/env/bin$ cd..
+cd..: command not found
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI/env/bin$ cd ..
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI/env$ cd ..
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ rm -rf env
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ ls
+Notes  README.md  __pycache__  db  main.py  requirement.txt
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ python3 -m venv env
+The virtual environment was not created successfully because ensurepip is not
+available.  On Debian/Ubuntu systems, you need to install the python3-venv
+package using the following command.
+
+    apt install python3.12-venv
+
+You may need to use sudo with that command.  After installing the python3-venv
+package, recreate your virtual environment.
+
+Failing command: /home/ubuntu/Instagram_clone_FastAPI/env/bin/python3
+
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ sudo  apt install python3.12-venv
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+^Citing for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)... 16s
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ ^C
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ ^C
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ pip install -r requirement.txt
+error: externally-managed-environment
+
+× This environment is externally managed
+╰─> To install Python packages system-wide, try apt install
+    python3-xyz, where xyz is the package you are trying to
+    install.
+
+    If you wish to install a non-Debian-packaged Python package,
+    create a virtual environment using python3 -m venv path/to/venv.
+    Then use path/to/venv/bin/python and path/to/venv/bin/pip. Make
+    sure you have python3-full installed.
+
+    If you wish to install a non-Debian packaged Python application,
+    it may be easiest to use pipx install xyz, which will manage a
+    virtual environment for you. Make sure you have pipx installed.
+
+    See /usr/share/doc/python3.12/README.venv for more information.
+
+note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+hint: See PEP 668 for the detailed specification.
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ python3 -m venv env
+The virtual environment was not created successfully because ensurepip is not
+available.  On Debian/Ubuntu systems, you need to install the python3-venv
+package using the following command.
+
+    apt install python3.12-venv
+
+You may need to use sudo with that command.  After installing the python3-venv
+package, recreate your virtual environment.
+
+Failing command: /home/ubuntu/Instagram_clone_FastAPI/env/bin/python3
+
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ sudo apt install python3.12-venv -y
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+^Citing for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)... 31s
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ ^C
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ sudo apt install python3-venv -y
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)
+^Citing for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4410 (apt)... 4s
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ ^C
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ ps aux | grep apt
+root        4408  0.0  0.7  17128  6912 pts/0    S+   14:32   0:00 sudo apt install python3.12-venv
+root        4409  0.0  0.2  17128  2480 pts/1    Ss   14:32   0:00 sudo apt install python3.12-venv
+root        4410  0.0  8.0  88168 78452 pts/1    S+   14:32   0:00 apt install python3.12-venv
+ubuntu      4615  0.0  0.2   7076  2048 pts/2    S+   14:45   0:00 grep --color=auto apt
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ sudo kill -9 4408 4409 4410
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ sudo rm -rf /var/lib/dpkg/lock-frontend
+sudo rm -rf /var/lib/dpkubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ g/lock
+-bash: g/lock: No such file or directory
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ sudo dpkg --configure -a
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ sudo apt install python3.12-venv -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  python3-pip-whl python3-setuptools-whl
+The following NEW packages will be installed:
+  python3-pip-whl python3-setuptools-whl python3.12-venv
+0 upgraded, 3 newly installed, 0 to remove and 125 not upgraded.
+Need to get 2424 kB of archives.
+After this operation, 2771 kB of additional disk space will be used.
+Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 python3-pip-whl all 24.0+dfsg-1ubuntu1.1 [1703 kB]
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 python3-setuptools-whl all 68.1.2-2ubuntu1.1 [716 kB]
+Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 python3.12-venv amd64 3.12.3-1ubuntu0.5 [5678 B]
+Fetched 2424 kB in 0s (45.7 MB/s)
+Selecting previously unselected package python3-pip-whl.
+(Reading database ... 78095 files and directories currently installed.)
+Preparing to unpack .../python3-pip-whl_24.0+dfsg-1ubuntu1.1_all.deb ...
+Unpacking python3-pip-whl (24.0+dfsg-1ubuntu1.1) ...
+Selecting previously unselected package python3-setuptools-whl.
+Preparing to unpack .../python3-setuptools-whl_68.1.2-2ubuntu1.1_all.deb ...
+Unpacking python3-setuptools-whl (68.1.2-2ubuntu1.1) ...
+Selecting previously unselected package python3.12-venv.
+Preparing to unpack .../python3.12-venv_3.12.3-1ubuntu0.5_amd64.deb ...
+Unpacking python3.12-venv (3.12.3-1ubuntu0.5) ...
+Setting up python3-setuptools-whl (68.1.2-2ubuntu1.1) ...
+Setting up python3-pip-whl (24.0+dfsg-1ubuntu1.1) ...
+Setting up python3.12-venv (3.12.3-1ubuntu0.5) ...
+Scanning processes...
+Scanning candidates...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart getty@tty1.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ ubuntu @ session #4: sshd[1093,1204]
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ python3 -m venv env
+ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ source env/bin/activate
+(env) ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ pip install -r requirements.txt
+ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'requirements.txt'
+(env) ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ pip install -r requirement.txt
+Collecting annotated-types==0.7.0 (from -r requirement.txt (line 1))
+  Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+Collecting anyio==4.8.0 (from -r requirement.txt (line 2))
+  Downloading anyio-4.8.0-py3-none-any.whl.metadata (4.6 kB)
+Collecting click==8.1.8 (from -r requirement.txt (line 3))
+  Downloading click-8.1.8-py3-none-any.whl.metadata (2.3 kB)
+Collecting colorama==0.4.6 (from -r requirement.txt (line 4))
+  Downloading colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+Collecting fastapi==0.115.9 (from -r requirement.txt (line 5))
+  Downloading fastapi-0.115.9-py3-none-any.whl.metadata (27 kB)
+Collecting greenlet==3.1.1 (from -r requirement.txt (line 6))
+  Downloading greenlet-3.1.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Collecting h11==0.14.0 (from -r requirement.txt (line 7))
+  Downloading h11-0.14.0-py3-none-any.whl.metadata (8.2 kB)
+Collecting idna==3.10 (from -r requirement.txt (line 8))
+  Downloading idna-3.10-py3-none-any.whl.metadata (10 kB)
+Collecting pydantic==2.10.6 (from -r requirement.txt (line 9))
+  Downloading pydantic-2.10.6-py3-none-any.whl.metadata (30 kB)
+Collecting pydantic_core==2.27.2 (from -r requirement.txt (line 10))
+  Downloading pydantic_core-2.27.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+Collecting sniffio==1.3.1 (from -r requirement.txt (line 11))
+  Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+Collecting SQLAlchemy==2.0.38 (from -r requirement.txt (line 12))
+  Downloading SQLAlchemy-2.0.38-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.6 kB)
+Collecting starlette==0.45.3 (from -r requirement.txt (line 13))
+  Downloading starlette-0.45.3-py3-none-any.whl.metadata (6.3 kB)
+Collecting typing_extensions==4.12.2 (from -r requirement.txt (line 14))
+  Downloading typing_extensions-4.12.2-py3-none-any.whl.metadata (3.0 kB)
+Collecting uvicorn==0.34.0 (from -r requirement.txt (line 15))
+  Downloading uvicorn-0.34.0-py3-none-any.whl.metadata (6.5 kB)
+Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+Downloading anyio-4.8.0-py3-none-any.whl (96 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.0/96.0 kB 7.1 MB/s eta 0:00:00
+Downloading click-8.1.8-py3-none-any.whl (98 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 98.2/98.2 kB 9.0 MB/s eta 0:00:00
+Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Downloading fastapi-0.115.9-py3-none-any.whl (94 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 94.9/94.9 kB 8.9 MB/s eta 0:00:00
+Downloading greenlet-3.1.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (613 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 613.1/613.1 kB 42.5 MB/s eta 0:00:00
+Downloading h11-0.14.0-py3-none-any.whl (58 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.3/58.3 kB 5.5 MB/s eta 0:00:00
+Downloading idna-3.10-py3-none-any.whl (70 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 6.4 MB/s eta 0:00:00
+Downloading pydantic-2.10.6-py3-none-any.whl (431 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 431.7/431.7 kB 29.9 MB/s eta 0:00:00
+Downloading pydantic_core-2.27.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 67.9 MB/s eta 0:00:00
+Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+Downloading SQLAlchemy-2.0.38-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 74.8 MB/s eta 0:00:00
+Downloading starlette-0.45.3-py3-none-any.whl (71 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 71.5/71.5 kB 10.9 MB/s eta 0:00:00
+Downloading typing_extensions-4.12.2-py3-none-any.whl (37 kB)
+Downloading uvicorn-0.34.0-py3-none-any.whl (62 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.3/62.3 kB 6.1 MB/s eta 0:00:00
+Installing collected packages: typing_extensions, sniffio, idna, h11, greenlet, colorama, click, annotated-types, uvicorn, SQLAlchemy, pydantic_core, anyio, starlette, pydantic, fastapi
+Successfully installed SQLAlchemy-2.0.38 annotated-types-0.7.0 anyio-4.8.0 click-8.1.8 colorama-0.4.6 fastapi-0.115.9 greenlet-3.1.1 h11-0.14.0 idna-3.10 pydantic-2.10.6 pydantic_core-2.27.2 sniffio-1.3.1 starlette-0.45.3 typing_extensions-4.12.2 uvicorn-0.34.0
+(env) ubuntu@ip-172-31-90-199:~/Instagram_clone_FastAPI$ python3 -m uvicorn main:app
+INFO:     Started server process [4867]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:41434 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41438 - "GET /favicon.ico HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:46108 - "GET /docs HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46112 - "GET /openapi.json HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49794 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33806 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51784 - "GET /shcksh HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:55222 - "GET / HTTP/1.0" 200 OK
+
+
+
+
